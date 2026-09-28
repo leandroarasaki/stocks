@@ -1,0 +1,338 @@
+:root {
+  --bg: #10141B;
+  --panel: #161B24;
+  --panel-raised: #1C222D;
+  --border: #262D3A;
+  --text: #E7EAF0;
+  --text-muted: #8993A6;
+  --mint: #3DDC97;
+  --coral: #FF6B6B;
+  --amber: #E8B84B;
+  --font-ui: 'Manrope', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand__mark {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+.updated {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) 300px;
+  gap: 1px;
+  background: var(--border);
+}
+
+.tickerRail {
+  background: var(--panel);
+  padding: 12px 0;
+  overflow-y: auto;
+}
+
+.tickerRail__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  border-left: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.tickerRail__item:hover {
+  color: var(--text);
+}
+
+.tickerRail__item.is-active {
+  color: var(--text);
+  border-left-color: var(--mint);
+  background: var(--panel-raised);
+}
+
+.tickerRail__change--up { color: var(--mint); }
+.tickerRail__change--down { color: var(--coral); }
+
+.chartPane {
+  background: var(--bg);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chartPane__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.symbol {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.price {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.change {
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.change--up { color: var(--mint); }
+.change--down { color: var(--coral); }
+
+.rangeControls {
+  display: flex;
+  gap: 4px;
+  align-self: flex-end;
+}
+
+.rangeBtn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.rangeBtn.is-active {
+  color: var(--text);
+  border-color: var(--mint);
+}
+
+.rangeBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.chart {
+  width: 100%;
+  height: 380px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--border);
+  margin-top: 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.statGrid__cell {
+  background: var(--panel);
+  padding: 12px 14px;
+}
+
+.statGrid__label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.statGrid__value {
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.panel {
+  background: var(--panel);
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.panel__block {
+  margin-bottom: 24px;
+}
+
+.panel__title {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.strategy {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.strategy--disabled {
+  opacity: 0.55;
+}
+
+.strategy__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.strategy__params {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.strategy__params input {
+  width: 52px;
+  margin-left: 6px;
+  background: var(--panel-raised);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-family: var(--font-mono);
+}
+
+.strategy__note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 10px 0 0;
+  line-height: 1.4;
+}
+
+.recommendation {
+  border-radius: 6px;
+  padding: 16px;
+  border: 1px solid var(--border);
+}
+
+.recommendation__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.recommendation__detail {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.recommendation--buy .recommendation__label { color: var(--mint); }
+.recommendation--sell .recommendation__label { color: var(--coral); }
+.recommendation--watch .recommendation__label { color: var(--amber); }
+.recommendation--hold .recommendation__label { color: var(--text); }
+
+.signalList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+
+.signalList li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.signalList li:last-child { border-bottom: none; }
+
+.signalList .value { font-family: var(--font-mono); }
+
+.footer {
+  padding: 14px 24px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.footer p { margin: 0; }
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .tickerRail {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+  }
+  .tickerRail__item {
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .tickerRail__item.is-active {
+    border-bottom-color: var(--mint);
+  }
+  .statGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,17 @@
+[
+  { "symbol": "AMD",    "yahoo": "AMD",     "type": "stock" },
+  { "symbol": "OKLO",   "yahoo": "OKLO",    "type": "stock" },
+  { "symbol": "ACHR",   "yahoo": "ACHR",    "type": "stock" },
+  { "symbol": "LEU",    "yahoo": "LEU",     "type": "stock" },
+  { "symbol": "LTBR",   "yahoo": "LTBR",    "type": "stock" },
+  { "symbol": "NNE",    "yahoo": "NNE",     "type": "stock" },
+  { "symbol": "GRO",    "yahoo": "GRO",     "type": "stock" },
+  { "symbol": "USAS",   "yahoo": "USAS",    "type": "stock" },
+  { "symbol": "GDX",    "yahoo": "GDX",     "type": "stock" },
+  { "symbol": "SLV",    "yahoo": "SLV",     "type": "stock" },
+  { "symbol": "XLE",    "yahoo": "XLE",     "type": "stock" },
+  { "symbol": "QQQM",   "yahoo": "QQQM",    "type": "stock" },
+  { "symbol": "AMZN",   "yahoo": "AMZN",    "type": "stock" },
+  { "symbol": "HUT",    "yahoo": "HUT",     "type": "stock" },
+  { "symbol": "ETHUSD", "yahoo": "ETH-USD", "type": "crypto" }
+]
