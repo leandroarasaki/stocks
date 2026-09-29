@@ -6,6 +6,7 @@ let chart = null;
 let candleSeries = null;
 let maShortSeries = null;
 let maLongSeries = null;
+let chartDataLength = 0;
 
 // ---- indicator math ----------------------------------------------------
 
@@ -258,6 +259,23 @@ function ensureChart() {
   maShortSeries = chart.addLineSeries({ color: '#E8B84B', lineWidth: 1 });
   maLongSeries = chart.addLineSeries({ color: '#8993A6', lineWidth: 1 });
 
+  chart.timeScale().subscribeVisibleLogicalRangeChange((range) => {
+    if (!range || chartDataLength === 0) return;
+    let { from, to } = range;
+    let changed = false;
+    if (from < 0) {
+      from = 0;
+      changed = true;
+    }
+    if (to > chartDataLength - 1) {
+      to = chartDataLength - 1;
+      changed = true;
+    }
+    if (changed) {
+      chart.timeScale().setVisibleLogicalRange({ from, to });
+    }
+  });
+
   new ResizeObserver(() => {
     chart.applyOptions({ width: document.getElementById('chart').clientWidth });
   }).observe(document.getElementById('chart'));
@@ -273,6 +291,8 @@ function renderChart(series) {
     close: series.close[i],
   }));
   candleSeries.setData(candles);
+  
+  chartDataLength = series.dates.length;
 
   const shortPeriod = Number(document.getElementById('maShort').value);
   const longPeriod = Number(document.getElementById('maLong').value);
