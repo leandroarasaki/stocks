@@ -282,8 +282,10 @@ function ensureChart() {
   }).observe(document.getElementById('chart'));
 }
 
-function renderChart(series) {
+function renderChart(series, { resetView = false } = {}) {
+  const previousRange = !resetView && chart ? chart.timeScale().getVisibleRange() : null;
   ensureChart();
+  chartDataLength = series.dates.length;
   const candles = series.dates.map((d, i) => ({
     time: d,
     open: series.open[i],
@@ -292,8 +294,6 @@ function renderChart(series) {
     close: series.close[i],
   }));
   candleSeries.setData(candles);
-  
-  chartDataLength = series.dates.length;
 
   const shortPeriod = Number(document.getElementById('maShort').value);
   const longPeriod = Number(document.getElementById('maLong').value);
@@ -307,7 +307,15 @@ function renderChart(series) {
     series.dates.map((d, i) => ({ time: d, value: longMa[i] })).filter((p) => p.value !== null)
   );
 
-  chart.timeScale().fitContent();
+  if (previousRange) {
+    try {
+      chart.timeScale().setVisibleRange(previousRange);
+    } catch (error) {
+      chart.timeScale().fitContent();
+    }
+  } else {
+    chart.timeScale().fitContent();
+  }
 }
 
 function renderHeader(symbol, stats) {
@@ -322,17 +330,17 @@ function renderHeader(symbol, stats) {
 function selectSymbol(symbol) {
   ACTIVE_SYMBOL = symbol;
   renderTickerRail();
-  update();
+  update({ resetView: true });
 }
 
-function update() {
+function update(options = {}) {
   const entry = DATA.tickers[ACTIVE_SYMBOL];
   const fullSeries = entry.series;
   const displaySeries = aggregateSeries(fullSeries, ACTIVE_INTERVAL);
 
   renderHeader(ACTIVE_SYMBOL, entry.stats);
   renderStatGrid(entry.stats);
-  renderChart(displaySeries);
+  renderChart(displaySeries, options);
 
   const signals = evaluateStrategies(displaySeries);
   const recommendation = scoreToRecommendation(signals);
