@@ -136,10 +136,21 @@ body {
 .change--up { color: var(--mint); }
 .change--down { color: var(--coral); }
 
+.rangeGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.rangeGroup__label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
 .rangeControls {
   display: flex;
   gap: 4px;
-  align-self: flex-end;
 }
 
 .rangeBtn {

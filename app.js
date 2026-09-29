@@ -260,21 +260,22 @@ function ensureChart() {
   maLongSeries = chart.addLineSeries({ color: '#8993A6', lineWidth: 1 });
 
   chart.timeScale().subscribeVisibleLogicalRangeChange((range) => {
-    if (!range || chartDataLength === 0) return;
-    let { from, to } = range;
-    let changed = false;
-    if (from < 0) {
-      from = 0;
-      changed = true;
-    }
-    if (to > chartDataLength - 1) {
-      to = chartDataLength - 1;
-      changed = true;
-    }
-    if (changed) {
+  if (!range || chartDataLength === 0) return;
+  const maxIndex = chartDataLength - 1;
+  let from = Math.max(0, Math.min(range.from, maxIndex));
+  let to = Math.max(0, Math.min(range.to, maxIndex));
+  if (from > to) {
+    from = 0;
+    to = maxIndex;
+  }
+  if (from !== range.from || to !== range.to) {
+    try {
       chart.timeScale().setVisibleLogicalRange({ from, to });
+    } catch (error) {
+      console.warn('chart range clamp failed', error);
     }
-  });
+  }
+});
 
   new ResizeObserver(() => {
     chart.applyOptions({ width: document.getElementById('chart').clientWidth });

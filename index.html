@@ -32,14 +32,17 @@
               <span id="activeChange" class="change">—</span>
             </div>
           </div>
-          <div class="rangeControls" id="intervalControls">
-            <button data-interval="4h" class="rangeBtn" disabled title="Precisa de dado intradiario, nao da para reconstruir isso a partir de barras diarias">4H</button>
-            <button data-interval="1d" class="rangeBtn is-active">1D</button>
-            <button data-interval="1w" class="rangeBtn">1W</button>
-            <button data-interval="1m" class="rangeBtn">1M</button>
-            <button data-interval="3m" class="rangeBtn">3M</button>
-            <button data-interval="6m" class="rangeBtn">6M</button>
-            <button data-interval="1y" class="rangeBtn">1Y</button>
+          <div class="rangeGroup">
+            <span class="rangeGroup__label">Interval</span>
+            <div class="rangeControls" id="intervalControls">
+              <button data-interval="4h" class="rangeBtn" disabled title="Precisa de dado intradiario, nao da para reconstruir isso a partir de barras diarias">4H</button>
+              <button data-interval="1d" class="rangeBtn is-active">1D</button>
+              <button data-interval="1w" class="rangeBtn">1W</button>
+              <button data-interval="1m" class="rangeBtn">1M</button>
+              <button data-interval="3m" class="rangeBtn">3M</button>
+              <button data-interval="6m" class="rangeBtn">6M</button>
+              <button data-interval="1y" class="rangeBtn">1Y</button>
+            </div>
           </div>
         </div>
         <div id="chart" class="chart"></div>
